@@ -1,12 +1,14 @@
 ---
+- stat: path='/usr/bin/gitlab-ci-multi-runner'
+  register: gitlabCIbinary
+
+- name: install
+  when: gitlabCIbinary.stat.exists == False
+  include: install.yml
+
 # tasks file for gitlab-ci-multi-runner
-- name: Debian...
-  when: ansible_os_family == 'Debian'
-  include: Debian.yml
-
-- name: RedHat..
-  when: ansible_os_family == 'RedHat'
-  include: RedHat.yml
-
 - name: add the gitlab-runner user to the docker group
   user: name=gitlab-runner append=yes groups=docker
+
+- name: restart gitlab-runner
+  service: name=gitlab-runner state=restarted
