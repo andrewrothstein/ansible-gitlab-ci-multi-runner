@@ -1,0 +1,9 @@
+---
+# tasks file for gitlab-ci-multi-runner
+- name: Debian...
+  when: ansible_os_family == 'Debian'
+  include: Debian.yml
+
+- name: RedHat..
+  when: ansible_os_family == 'RedHat'
+  include: RedHat.yml

@@ -1,0 +1,4 @@
+---
+# vars file for gitlab-ci-multi-runner
+gitlab_ci_multi_runner_deb_url : '{{gitlab_ci_multi_runner_mirror}}/script.deb.sh'
+gitlab_ci_multi_runner_rpm_url : '{{gitlab_ci_multi_runner_mirror}}/script.rpm.sh'

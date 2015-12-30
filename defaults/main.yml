@@ -1,0 +1,3 @@
+---
+# defaults file for gitlab-ci-multi-runner
+gitlab_ci_multi_runner_mirror : 'https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner'
