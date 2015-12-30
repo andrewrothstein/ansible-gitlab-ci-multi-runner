@@ -7,3 +7,6 @@
 - name: RedHat..
   when: ansible_os_family == 'RedHat'
   include: RedHat.yml
+
+- name: add the gitlab-runner user to the docker group
+  user: name=gitlab-runner append=yes groups=docker
