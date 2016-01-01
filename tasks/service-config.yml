@@ -1,0 +1,5 @@
+---
+- name: systemd config...
+  when: ansible_os_family == 'RedHat'
+  include: RedHat-service-config.yml
+  

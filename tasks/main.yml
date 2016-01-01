@@ -10,5 +10,8 @@
 - name: add the gitlab-runner user to the docker group
   user: name=gitlab-runner append=yes groups=docker
 
+- name: service configurator...
+  include: service-config.yml
+  
 - name: restart gitlab-runner
   service: name=gitlab-runner state=restarted

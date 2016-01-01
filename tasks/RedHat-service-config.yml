@@ -1,0 +1,22 @@
+---
+- name: install sysconfig/gitlab-runner
+  template: >-
+    src=etc/sysconfig/gitlab-runner.j2
+    dest=/etc/sysconfig/gitlab-runner
+    owner=root
+    group=root
+    mode=644
+
+- name: upgrade service definition...
+  register: gitlabrunnerServiceInstall
+  template: >-
+    src=etc/systemd/system/gitlab-runner.service.j2
+    dest=/etc/systemd/system/gitlab-runner.service
+    owner=root
+    group=root
+    mode=644
+
+- name: systemctl daemon-reload
+  command: systemctl daemon-reload
+  when: gitlabrunnerServiceInstall.changed
+    
