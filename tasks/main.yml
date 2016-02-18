@@ -14,4 +14,4 @@
   include: service-config.yml
   
 - name: restart gitlab-runner
-  service: name=gitlab-runner state=restarted
+  service: name=gitlab-runner state=started
