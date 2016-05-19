@@ -11,4 +11,4 @@
   command: /tmp/gitlab_ci_multi.sh
 
 - name: install gitlab-ci-multi-runner
-  yum: name=gitlab-ci-multi-runner state=latest
+  package: name=gitlab-ci-multi-runner state=latest
