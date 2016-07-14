@@ -31,11 +31,11 @@
   become_user: root
   user: name=gitlab-runner append=yes groups=docker
 
-- name: mkdir /etc/sysconfig/gitlab-runner
+- name: mkdir /etc/sysconfig for gitlab-runner config
   become: yes
   become_user: root
   file: >-
-    path=/etc/sysconfig/gitlab-runner
+    path=/etc/sysconfig
     state=directory
     mode=0755
   
