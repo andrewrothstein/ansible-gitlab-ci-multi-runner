@@ -15,7 +15,7 @@ galaxy_info:
         - 23
     - name: Ubuntu
       versions:
-        - trusty
+        - xenial
 
   galaxy_tags:
     - development

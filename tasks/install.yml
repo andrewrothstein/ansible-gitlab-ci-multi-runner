@@ -1,9 +1,0 @@
----
-- name: Debian...
-  when: ansible_os_family == 'Debian'
-  include: install-Debian.yml
-
-- name: RedHat..
-  when: ansible_os_family == 'RedHat'
-  include: install-RedHat.yml
-
