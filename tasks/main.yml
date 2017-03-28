@@ -44,7 +44,7 @@
     - d: /etc/gitlab-runner
       m: '0600'
     - d: /etc/sysconfig
-      m:' 0755'
+      m: '0755'
   file:
     state: directory
     path: '{{item.d}}'
