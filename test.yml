@@ -2,3 +2,4 @@
 - hosts: all
   roles:
     - role: '{{playbook_dir}}'
+      gitlab_ci_multi_runner_activate: False

@@ -9,10 +9,10 @@
 - name: get bootstrapping script...
   become: yes
   become_user: root
-  get_url: >-
-    url={{gitlab_ci_multi_runner_url}}
-    dest=/tmp/gitlab_ci_multi.sh
-    mode=0755
+  get_url:
+    url: '{{gitlab_ci_multi_runner_url}}'
+    dest: /tmp/gitlab_ci_multi.sh
+    mode: 0755
 
 - name: running bootstrap script
   become: yes
@@ -24,56 +24,45 @@
 - name: install gitlab-ci-multi-runner
   become: yes
   become_user: root
-  package: name=gitlab-ci-multi-runner state=present
+  package:
+    name: gitlab-ci-multi-runner
+    state: present
 
 - name: add the gitlab-runner user to the docker group
   become: yes
   become_user: root
-  user: name=gitlab-runner append=yes groups=docker
+  with_items: '{{gitlab_ci_multi_runner_addl_groups}}'
+  user:
+    name: gitlab-runner
+    append: yes
+    groups: '{{item}}'
 
-- name: mkdir /etc/gitlab-runner for gitlab-runner config
+- name: mkdir /etc/gitlab-runner and /etc/sysconfig
   become: yes
   become_user: root
-  file: >-
-    path=/etc/gitlab-runner
-    state=directory
-    mode=0600
+  with_items:
+    - d: /etc/gitlab-runner
+      m: '0600'
+    - d: /etc/sysconfig
+      m:' 0755'
+  file:
+    state: directory
+    path: '{{item.d}}'
+    mode: '{{item.m}}'
 
-- name: copy gitlab-runner/config.toml
-  become: yes
-  become_user: root
-  template: >-
-    src=etc/gitlab-runner/config.toml.j2
-    dest=/etc/gitlab-runner/config.toml
-    mode=0600
-
-- name: mkdir /etc/sysconfig for gitlab-runner config
-  become: yes
-  become_user: root
-  file: >-
-    path=/etc/sysconfig
-    state=directory
-    mode=0755
-  
 - name: install sysconfig/gitlab-runner
   become: yes
   become_user: root
-  register: gitlabrunnerServiceInstall
   with_items:
-    - etc/sysconfig/gitlab-runner
-    - etc/systemd/system/gitlab-runner.service
-  template: >-
-    src={{item}}.j2
-    dest=/{{item}}
-    mode=0644
+    - d: /etc/sysconfig
+      f: gitlab-runner
+      m: '0644'
+    - d: /etc/gitlab-runner
+      f: config.toml
+      m: '0600'
+  template:
+    src: '{{item.f}}.j2'
+    dest: '{{item.d}}/{{item.f}}'
+    mode: '{{item.m}}'
 
-- name: systemctl daemon-reload
-  become: yes
-  become_user: root
-  command: systemctl daemon-reload
-  when: gitlabrunnerServiceInstall|changed
-    
-- name: restart gitlab-runner
-  become: yes
-  become_user: root
-  service: name=gitlab-runner state=started enabled=yes
+- include: systemd.yml
