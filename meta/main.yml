@@ -13,9 +13,16 @@ galaxy_info:
     - name: Fedora
       versions:
         - 23
+        - 24
+        - 25
+        - 26
     - name: Ubuntu
       versions:
+        - trusty
         - xenial
+    - name: Debian
+      versions:
+        - jessie
 
   galaxy_tags:
     - development

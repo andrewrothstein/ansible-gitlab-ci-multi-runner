@@ -1,6 +1,6 @@
 ---
 # defaults file for gitlab-ci-multi-runner
-gitlab_ci_multi_runner_mirror : 'https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner'
+gitlab_ci_multi_runner_mirror : https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner
 gitlab_ci_multi_runner_addl_groups:
   - docker
 gitlab_ci_multi_runner_concurrent_runners_per_host : 1

@@ -1,5 +1,6 @@
 andrewrothstein.gitlab-ci-multi-runner
 ======================================
+[![Build Status](https://travis-ci.org/andrewrothstein/ansible-gitlab-ci-multi-runner.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-gitlab-ci-multi-runner)
 
 Installs and configures a [GitLab Runner](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner).
 
