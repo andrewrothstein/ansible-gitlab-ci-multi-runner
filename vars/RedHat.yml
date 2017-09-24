@@ -1,2 +1,2 @@
 ---
-gitlab_ci_multi_runner_url: '{{gitlab_ci_multi_runner_mirror}}/script.rpm.sh'
+gitlab_runner_url: '{{gitlab_runner_mirror}}/script.rpm.sh'

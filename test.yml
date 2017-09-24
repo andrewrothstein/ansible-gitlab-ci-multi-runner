@@ -2,5 +2,5 @@
 - hosts: all
   roles:
     - role: '{{playbook_dir}}'
-      gitlab_ci_multi_runner_activate: False
-      gitlab_ci_multi_runner_addl_groups: []
+      gitlab_runner_activate: False
+      gitlab_runner_addl_groups: []
