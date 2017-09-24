@@ -14,28 +14,28 @@
   become: yes
   become_user: root
   get_url:
-    url: '{{gitlab_ci_multi_runner_url}}'
-    dest: /tmp/gitlab_ci_multi.sh
+    url: '{{gitlab_runner_url}}'
+    dest: /tmp/gitlab-runner.sh
     mode: 0755
 
 - name: running bootstrap script
   become: yes
   become_user: root
-  command: /tmp/gitlab_ci_multi.sh
+  command: /tmp/gitlab-runner.sh
   args:
-    creates: /usr/bin/gitlab-ci-multi-runner
+    creates: /usr/bin/gitlab-runner
 
-- name: install gitlab-ci-multi-runner
+- name: install gitlab-runner
   become: yes
   become_user: root
   package:
-    name: gitlab-ci-multi-runner
+    name: gitlab-runner
     state: present
 
 - name: add the gitlab-runner user to the docker group
   become: yes
   become_user: root
-  with_items: '{{gitlab_ci_multi_runner_addl_groups}}'
+  with_items: '{{gitlab_runner_addl_groups}}'
   user:
     name: gitlab-runner
     append: yes
