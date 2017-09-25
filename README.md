@@ -1,8 +1,8 @@
-spk83.gitlab-runner
+andrewrothstein.gitlab-ci-multi-runner
 ======================================
-[![Build Status](https://travis-ci.org/spk83/ansible-gitlab-runner.svg?branch=master)](https://travis-ci.org/spk83/ansible-gitlab-runner)
+[![Build Status](https://travis-ci.org/andrewrothstein/ansible-gitlab-ci-multi-runner.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-gitlab-ci-multi-runner)
 
-Installs and configures a [GitLab Runner](https://gitlab.com/gitlab-org/gitlab-runner).
+Installs and configures a [GitLab Runner](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner).
 
 Requirements
 ------------
@@ -25,7 +25,7 @@ Example Playbook
 ```yml
 - hosts: servers
   roles:
-    - spk83.gitlab-runner
+    - andrewrothstein.gitlab-ci-multi-runner
 ```
 
 License

@@ -1,8 +1,8 @@
 ---
-# defaults file for gitlab-runner
-gitlab_runner_mirror : https://packages.gitlab.com/install/repositories/runner/gitlab-runner
-gitlab_runner_addl_groups:
+# defaults file for gitlab-ci-multi-runner
+gitlab_ci_multi_runner_mirror : https://packages.gitlab.com/install/repositories/runner/gitlab-runner
+gitlab_ci_multi_runner_addl_groups:
   - docker
-gitlab_runner_concurrent_runners_per_host : 1
-gitlab_runner_check_gitlab_new_builds_interval : 0
-gitlab_runner_activate: True
+gitlab_ci_multi_runner_concurrent_runners_per_host : 1
+gitlab_ci_multi_runner_check_gitlab_new_builds_interval : 0
+gitlab_ci_multi_runner_activate: True
