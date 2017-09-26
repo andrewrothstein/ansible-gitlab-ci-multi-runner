@@ -69,4 +69,4 @@
     dest: '{{item.d}}/{{item.f}}'
     mode: '{{item.m}}'
 
-- include: systemd.yml
+- include_tasks: '{{gitlab_ci_multi_runner_init|default("systemd")}}.yml'
