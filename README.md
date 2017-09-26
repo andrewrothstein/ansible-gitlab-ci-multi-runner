@@ -37,3 +37,8 @@ Author Information
 ------------------
 
 Andrew Rothstein <andrew.rothstein@gmail.com>
+
+Contributors
+------------
+
+Vishal Shah <vishal.shah@nyu.edu>

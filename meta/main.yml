@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Andrew Rothstein
-  description: gitlab-ci-multi-runner role
+  description: gitlab-runner role
   company: BlackRock
   license:
     - MIT
@@ -24,7 +24,7 @@ galaxy_info:
         - jessie
 
   galaxy_tags:
-    - development
+    - gitlab-ci
+    - gitlab-runner
 
 dependencies: []
-  
