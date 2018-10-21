@@ -16,7 +16,7 @@
   become: yes
   become_user: root
   command: systemctl daemon-reload
-  when: gitlab_ci_multi_runner_activate and gitlabrunnerServiceInstall|changed
+  when: gitlab_ci_multi_runner_activate and gitlabrunnerServiceInstall is changed
     
 - name: start gitlab-runner
   become: yes
