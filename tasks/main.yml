@@ -1,20 +1,20 @@
 ---
 - name: resolve platform specific vars
-  include_vars: '{{item}}'
+  include_vars: '{{ item }}'
   with_first_found:
     - files:
-        - '{{ansible_distribution}}-{{ansible_distribution_release}}.yml'
-        - '{{ansible_distribution}}.yml'
-        - '{{ansible_os_family}}.yml'
+        - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
       skip: true
       paths:
-        - '{{role_path}}/vars'
-    
+        - '{{ role_path }}/vars'
+
 - name: get bootstrapping script...
   become: yes
   become_user: root
   get_url:
-    url: '{{gitlab_ci_multi_runner_url}}'
+    url: '{{ gitlab_ci_multi_runner_url }}'
     dest: /tmp/gitlab-runner.sh
     mode: 0755
 
@@ -35,11 +35,11 @@
 - name: add the gitlab-runner user to the docker group
   become: yes
   become_user: root
-  with_items: '{{gitlab_ci_multi_runner_addl_groups}}'
+  with_items: '{{ gitlab_ci_multi_runner_addl_groups }}'
   user:
     name: gitlab-runner
     append: yes
-    groups: '{{item}}'
+    groups: '{{ item }}'
 
 - name: mkdir /etc/gitlab-runner and /etc/sysconfig
   become: yes
@@ -51,8 +51,8 @@
       m: '0755'
   file:
     state: directory
-    path: '{{item.d}}'
-    mode: '{{item.m}}'
+    path: '{{ item.d }}'
+    mode: '{{ item.m }}'
 
 - name: install sysconfig/gitlab-runner
   become: yes
@@ -65,8 +65,8 @@
       f: config.toml
       m: '0600'
   template:
-    src: '{{item.f}}.j2'
-    dest: '{{item.d}}/{{item.f}}'
-    mode: '{{item.m}}'
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m }}'
 
-- include_tasks: '{{gitlab_ci_multi_runner_init|default("systemd")}}.yml'
+- include_tasks: '{{ gitlab_ci_multi_runner_init|default("systemd") }}.yml'

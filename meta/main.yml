@@ -24,7 +24,8 @@ galaxy_info:
         - jessie
 
   galaxy_tags:
-    - gitlab-ci
-    - gitlab-runner
+    - gitlab
+    - ci
+    - runner
 
 dependencies: []

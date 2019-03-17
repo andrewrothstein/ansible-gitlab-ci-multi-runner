@@ -8,16 +8,17 @@
       f: gitlab-runner.service
       m: '0644'
   template:
-    src: '{{item.f}}.j2'
-    dest: '{{item.d}}/{{item.f}}'
-    mode: '{{item.m}}'
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m }}'
 
 - name: systemctl daemon-reload
   become: yes
   become_user: root
-  command: systemctl daemon-reload
   when: gitlab_ci_multi_runner_activate and gitlabrunnerServiceInstall is changed
-    
+  systemd:
+    daemon_reload: yes
+
 - name: start gitlab-runner
   become: yes
   become_user: root
