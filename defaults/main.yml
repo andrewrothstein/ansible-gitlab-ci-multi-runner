@@ -6,3 +6,4 @@ gitlab_ci_multi_runner_addl_groups:
 gitlab_ci_multi_runner_concurrent_runners_per_host: 1
 gitlab_ci_multi_runner_check_gitlab_new_builds_interval: 0
 gitlab_ci_multi_runner_activate: True
+gitlab_ci_multi_runner_dl_dir: /tmp
