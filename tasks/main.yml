@@ -15,13 +15,13 @@
   become_user: root
   get_url:
     url: '{{ gitlab_ci_multi_runner_url }}'
-    dest: /tmp/gitlab-runner.sh
+    dest: '{{ gitlab_ci_multi_runner_dl_dir }}/gitlab-runner.sh'
     mode: 0755
 
 - name: running bootstrap script
   become: yes
   become_user: root
-  command: /tmp/gitlab-runner.sh
+  command: '{{ gitlab_ci_multi_runner_dl_dir }}/gitlab-runner.sh'
   args:
     creates: /usr/bin/gitlab-runner
 
