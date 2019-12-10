@@ -1,5 +1,5 @@
 ---
 gitlab_ci_multi_runner_url: '{{ gitlab_ci_multi_runner_mirror }}/script.rpm.sh'
 gitlab_ci_multi_runner_install_env:
-  os: el
+  os: fedora
   dist: '{{ ansible_distribution_major_version }}'

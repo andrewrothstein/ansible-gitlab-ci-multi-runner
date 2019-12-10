@@ -24,6 +24,7 @@
   command: '{{ gitlab_ci_multi_runner_dl_dir }}/gitlab-runner.sh'
   args:
     creates: /usr/bin/gitlab-runner
+  environment: '{{ gitlab_ci_multi_runner_install_env | default({}) }}'
 
 - name: install gitlab-runner
   become: yes
