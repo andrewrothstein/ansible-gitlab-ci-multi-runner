@@ -1,5 +1,4 @@
 - centos_7
-- centos_8
 - debian_buster
 - debian_jessie
 - debian_stretch
@@ -13,6 +12,5 @@
 - fedora_30
 - fedora_31
 - fedora_32
-- ubi8_8.0
 - ubuntu_bionic
 - ubuntu_xenial

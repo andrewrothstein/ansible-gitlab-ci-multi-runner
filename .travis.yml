@@ -8,7 +8,6 @@ branches:
 dist: xenial
 env:
 - OS=centos_7
-- OS=centos_8
 - OS=debian_buster
 - OS=debian_jessie
 - OS=debian_stretch
@@ -22,7 +21,6 @@ env:
 - OS=fedora_30
 - OS=fedora_31
 - OS=fedora_32
-- OS=ubi8_8.0
 - OS=ubuntu_bionic
 - OS=ubuntu_xenial
 language: python
