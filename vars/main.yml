@@ -1,0 +1,3 @@
+---
+gitlab_ci_multi_runner_bootstrap_script: '{{ gitlab_ci_multi_runner_dl_dir }}/gitlab-runner.sh'
+gitlab_ci_multi_runner_pkg_name: gitlab-runner-{{ gitlab_ci_multi_runner_ver }}{{ gitlab_ci_multi_runner_pkgver | default("") }}.{{ gitlab_ci_multi_runner_arch }}

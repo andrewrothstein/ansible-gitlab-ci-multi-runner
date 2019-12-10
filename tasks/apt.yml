@@ -1,0 +1,8 @@
+---
+- name: install gitlab-runner
+  become: yes
+  become_user: root
+  apt:
+    name: '{{ gitlab_ci_multi_runner_pkg_name }}'
+    state: present
+    dpkg_options: force-downgrade

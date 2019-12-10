@@ -1,2 +1,4 @@
 ---
 gitlab_ci_multi_runner_url: '{{gitlab_ci_multi_runner_mirror}}/script.deb.sh'
+gitlab_ci_multi_runner_arch: amd64
+gitlab_ci_multi_runner_pkg_mgr: apt

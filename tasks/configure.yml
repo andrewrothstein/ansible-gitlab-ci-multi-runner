@@ -1,0 +1,39 @@
+---
+- name: add the gitlab-runner user to other groups
+  become: yes
+  become_user: root
+  with_items: '{{ gitlab_ci_multi_runner_addl_groups | default([]) }}'
+  user:
+    name: gitlab-runner
+    append: yes
+    groups: '{{ item }}'
+
+- name: mkdir /etc/gitlab-runner and /etc/sysconfig
+  become: yes
+  become_user: root
+  with_items:
+    - d: /etc/gitlab-runner
+      m: '0600'
+    - d: /etc/sysconfig
+      m: '0755'
+  file:
+    state: directory
+    path: '{{ item.d }}'
+    mode: '{{ item.m }}'
+
+- name: install sysconfig/gitlab-runner
+  become: yes
+  become_user: root
+  with_items:
+    - d: /etc/sysconfig
+      f: gitlab-runner
+      m: '0644'
+    - d: /etc/gitlab-runner
+      f: config.toml
+      m: '0600'
+  template:
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m }}'
+
+- include_tasks: '{{ gitlab_ci_multi_runner_init | default("systemd") }}.yml'

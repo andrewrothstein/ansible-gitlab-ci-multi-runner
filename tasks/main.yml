@@ -9,65 +9,28 @@
       skip: true
       paths:
         - '{{ role_path }}/vars'
-
-- name: get bootstrapping script...
+- name: look for bootstrap script
   become: yes
-  become_user: root
-  get_url:
-    url: '{{ gitlab_ci_multi_runner_url }}'
-    dest: '{{ gitlab_ci_multi_runner_dl_dir }}/gitlab-runner.sh'
-    mode: 0755
+  stat:
+    path: '{{ gitlab_ci_multi_runner_bootstrap_script }}'
+  changed_when: False
+  register: gitlab_ci_multi_runner_bootstrap_register
+- when: not gitlab_ci_multi_runner_bootstrap_register.stat.exists
+  block:
+    - name: get bootstrapping script...
+      become: yes
+      become_user: root
+      get_url:
+        url: '{{ gitlab_ci_multi_runner_url }}'
+        dest: '{{ gitlab_ci_multi_runner_bootstrap_script }}'
+        mode: 0755
 
-- name: running bootstrap script
-  become: yes
-  become_user: root
-  command: '{{ gitlab_ci_multi_runner_dl_dir }}/gitlab-runner.sh'
-  args:
-    creates: /usr/bin/gitlab-runner
-  environment: '{{ gitlab_ci_multi_runner_install_env | default({}) }}'
+    - name: running bootstrap script
+      become: yes
+      become_user: root
+      command: '{{ gitlab_ci_multi_runner_bootstrap_script }}'
+      args:
+        creates: /usr/bin/gitlab-runner
+      environment: '{{ gitlab_ci_multi_runner_install_env | default({}) }}'
 
-- name: install gitlab-runner
-  become: yes
-  become_user: root
-  package:
-    name: gitlab-runner
-    state: present
-
-- name: add the gitlab-runner user to the docker group
-  become: yes
-  become_user: root
-  with_items: '{{ gitlab_ci_multi_runner_addl_groups }}'
-  user:
-    name: gitlab-runner
-    append: yes
-    groups: '{{ item }}'
-
-- name: mkdir /etc/gitlab-runner and /etc/sysconfig
-  become: yes
-  become_user: root
-  with_items:
-    - d: /etc/gitlab-runner
-      m: '0600'
-    - d: /etc/sysconfig
-      m: '0755'
-  file:
-    state: directory
-    path: '{{ item.d }}'
-    mode: '{{ item.m }}'
-
-- name: install sysconfig/gitlab-runner
-  become: yes
-  become_user: root
-  with_items:
-    - d: /etc/sysconfig
-      f: gitlab-runner
-      m: '0644'
-    - d: /etc/gitlab-runner
-      f: config.toml
-      m: '0600'
-  template:
-    src: '{{ item.f }}.j2'
-    dest: '{{ item.d }}/{{ item.f }}'
-    mode: '{{ item.m }}'
-
-- include_tasks: '{{ gitlab_ci_multi_runner_init|default("systemd") }}.yml'
+- include: '{{ gitlab_ci_multi_runner_pkg_mgr }}.yml'

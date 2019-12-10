@@ -1,6 +1,13 @@
 ---
 - hosts: all
   roles:
-    - role: '{{playbook_dir}}'
+    - role: '{{ playbook_dir }}'
       gitlab_ci_multi_runner_activate: False
-      gitlab_ci_multi_runner_addl_groups: []
+      gitlab_ci_multi_runner_ver: 12.4.1
+    - role: '{{ playbook_dir }}'
+      gitlab_ci_multi_runner_activate: False
+      gitlab_ci_multi_runner_ver: 12.4.0
+    - role: '{{ playbook_dir }}'
+      gitlab_ci_multi_runner_activate: False
+      gitlab_ci_multi_runner_ver: 12.5.0
+
