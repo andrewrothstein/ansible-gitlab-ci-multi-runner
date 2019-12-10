@@ -3,6 +3,6 @@
   become: yes
   become_user: root
   yum:
-    name: '{{ gitlab_ci_multi_runner_pkg_name }}'
+    name: gitlab-runner-{{ gitlab_ci_multi_runner_ver }}{{ gitlab_ci_multi_runner_pkgver }}.{{ gitlab_ci_multi_runner_arch }}
     state: present
     allow_downgrade: yes
